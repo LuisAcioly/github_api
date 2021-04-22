@@ -1,6 +1,6 @@
 # Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Projeto referente a uma das atividades da trilha de react do programa New Thinkers 2021 da Squadra
 
 ## Available Scripts
 
