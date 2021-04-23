@@ -54,3 +54,33 @@ img {
   justify-content: center;
   align-items: center;
 }
+
+.head button {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: underline;
+  color: rgb(47, 85, 255);
+}
+
+.headFav {
+  display:flex;
+  justify-content:left;
+  margin-left: 10vw;
+  margin-bottom: 2%;
+}
+
+.headFav button {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: underline;
+  color: rgb(47, 85, 255);
+}
+

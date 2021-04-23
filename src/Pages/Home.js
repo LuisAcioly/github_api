@@ -2,13 +2,15 @@ import api from '../api';
 import { useEffect, useState } from "react";
 import { FaRegStar, FaStar } from 'react-icons/fa';
 import github from '../assets/github.png';
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 
 
 const Home = () => {
 
     const [repositories, setRepositories] = useState([]);
     const [result, setResult] = useState([]);
+    const history = useHistory();
+    const location = useLocation();
 
     function repositoryClass(name, login){
         this.name = name;
@@ -17,15 +19,23 @@ const Home = () => {
     }
 
     useEffect(() => {
-        setList();
+        const param = location.state.list;
+
+        if(param === []){
+            setList();
+        }
+        else {
+            setRepositories(param);
+            console.log(repositories);
+        }
+        
     }, []);
 
     async function setList(){
         const response = await api.request('GET /search/repositories', {
             q: 'q'
           })
-          const data = response.data.items;
-
+        const data = response.data.items;
         var array = [];
 
         Object.keys(response.data.items).forEach(
@@ -33,8 +43,17 @@ const Home = () => {
                 array.push(data[item]);
             }
         )
-        setRepositories(array);
-        console.log(array);
+
+        var resultList = [];
+
+        array.forEach(
+            function(item){
+                var repository = new repositoryClass(item.name, item.owner.login);
+                resultList.push(repository);
+            }
+        );
+        setRepositories(resultList);
+        console.log(resultList);
     }
 
     function Search(e){
@@ -47,21 +66,10 @@ const Home = () => {
             }
         });
 
-        var resultList = [];
-
-        list.forEach(
-            function(item){
-                var repository = new repositoryClass(item.name, item.owner.login);
-                resultList.push(repository);
-            }
-        );
-
-        console.log(resultList);
-        setResult(resultList);
+        setResult(list);
     }
 
     function favor(item){
-        console.log("Entrou");
         const index = repositories.findIndex(t => t.id === item.id);
         const listTemp = [...repositories];
 
@@ -76,9 +84,17 @@ const Home = () => {
         setRepositories(listTemp);
     }
 
+    function callFavorites(){
+
+        history.push({
+            pathname: '/favorites',
+            state: { list: repositories }
+        });
+    }
+
     return (
         <div className="App">
-            <div className="head"><a href="#">Meus favoritos</a></div>
+            <div className="head"><button onClick={callFavorites}>Meus favoritos</button></div>
             <div className="forms">
                 <form onSubmit={Search}>
                 <select name="type" style={{height: 21, marginRight: 2}}>
@@ -94,7 +110,6 @@ const Home = () => {
                 <ul>
                     {result.map((item, index) => {
                         return <li key={index} style={{marginBottom: 50}}>
-                            {console.log(index)}
                             <div className="favorite">
                                 <button onClick={() => favor(item)}>
                                     {item.favorite === false ? <FaRegStar/> : <FaStar/>}

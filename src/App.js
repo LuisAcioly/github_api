@@ -1,5 +1,6 @@
 import './App.css';
-import Home from './Pages/Home'
+import Home from './Pages/Home';
+import Favorites from './Pages/Favorites'
 import { BrowserRouter as Router, Route, Switch, Link  } from 'react-router-dom';
 
 function App() {
@@ -10,7 +11,7 @@ function App() {
           <Home />
         </Route>
         <Route exact path="/favorites">
-          <Home />
+          <Favorites />
         </Route>
       </Switch>
     </Router>
