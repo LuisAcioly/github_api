@@ -12,3 +12,45 @@
   margin-left: 29vw;
   margin-bottom: 2%;
 }
+
+.res {
+  display:flex;
+  justify-content:center;
+  flex-direction: column;
+  width: 150px;
+  text-align: center;
+  font-size: 10px;
+}
+
+
+ul {
+  list-style: none;
+  flex-wrap: wrap;
+  display: flex;
+}
+
+ul li {
+  flex: 1 0 5%;
+}
+
+img {
+  max-width: 50px;
+  align-self: center;
+  margin-bottom: 2.5vh;;
+}
+
+.favorite {
+  display: flex;
+  justify-content:flex-end;
+  width: 120px;
+  padding-right: 2vw;
+}
+
+.favorite button {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
