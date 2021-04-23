@@ -5,9 +5,14 @@ import { BrowserRouter as Router, Route, Switch, Link  } from 'react-router-dom'
 function App() {
   return (
     <Router>
-      <Route exact path="/">
-        <Home />
-      </Route>
+      <Switch>
+        <Route exact path="/">
+          <Home />
+        </Route>
+        <Route exact path="/favorites">
+          <Home />
+        </Route>
+      </Switch>
     </Router>
   );
 }
